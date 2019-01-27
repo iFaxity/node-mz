@@ -1,6 +1,5 @@
-const assert = require('assert');
-
 describe('crypto', () => {
+  const assert = require('assert').strict;
   const crypto = require('../crypto');
 
   it('Promised function', done => {

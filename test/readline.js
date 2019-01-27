@@ -1,103 +1,89 @@
-const assert = require('assert');
-
-/*describe('readline', () => {
-  const stream = require('stream');
+describe('readline', () => {
+  const assert = require('assert').strict;
   const readline = require('../readline');
+  const { PassThrough } = require('stream');
 
-  it('.question().then()', done => {
-    const input = stream.PassThrough();
-    const output = stream.PassThrough();
-    const rl = readline.createInterface({ input: input, output: output });
+  // Used for the .question tests
+  const question = 'test: ';
+  const answer = 'yes';
+  const completion = 'yesss';
 
-    rl.question('a').then(answer => {
-      assert.equal(answer, 'b');
+  it('Promised .question', done => {
+    const input = PassThrough();
+    const output = PassThrough();
+    const rl = readline.createInterface({ input, output });
+
+    rl.question(question).then(str => {
+      assert.equal(str, answer);
       done();
     });
 
-    assert.equal(output.read(), 'a');
-    input.write('b\n');
+    assert.equal(output.read().toString('utf-8'), question);
+    input.write(`${answer}\n`);
   });
 
-  it('completer support', done => {
-    function completer (line) {
-      assert.equal(line, 'b');
-      return Promise.resolve([['bTESTSTRING'], line]);
-    }
-
-    const input = stream.PassThrough();
-    const output = stream.PassThrough();
-    const bufferedOutput = '';
-    const rl = readline.createInterface({ input: input, output: output, completer: completer, terminal: true });
-
-    rl.question('a').then(answer => {
-      assert.equal(answer, 'bTESTSTRING');
-      done();
+  it('Promised .question with promised completer', done => {
+    const input = PassThrough();
+    const output = PassThrough();
+    let buffer = '';
+    const rl = readline.createInterface({
+      input,
+      output,
+      terminal: true,
+      async completer(line) {
+        assert.equal(line, answer);
+        return [[completion], line];
+      },
     });
 
-    function onOutputData(data) {
-      bufferedOutput += data.toString();
+    function onData(data) {
+      buffer += data.toString();
 
-      if (bufferedOutput.match(/TESTSTRING/)) {
+      if (buffer.indexOf(completion) >= 0) {
         input.write('\n');
-        output.removeListener('data', onOutputData);
+        output.off('data', onData);
       }
     }
 
-    output.on('data', onOutputData);
-    input.write('b\t');
+    rl.question(question).then(str => {
+      assert.equal(str, completion);
+      done();
+    });
+
+    output.on('data', onData);
+    input.write(`${answer}\t`);
   });
 
-  describe('callback support', () => {
-    it('.question()', done => {
-      const input = stream.PassThrough();
-      const output = stream.PassThrough();
-      const rl = readline.createInterface({ input: input, output: output });
+  it('Promised .question with sync completer', done => {
+    const input = PassThrough();
+    const output = PassThrough();
+    let buffer = '';
 
-      rl.question('a', answer => {
-        assert.equal(answer, 'b');
-        done();
-      });
-
-      assert.equal(output.read(), 'a');
-      input.write('b\n');
+    const rl = readline.createInterface({
+      input,
+      output,
+      terminal: true,
+      completer(line) {
+        assert.equal(line, answer);
+        return [[completion], line];
+      },
     });
 
-    it('completer support sync', done => {
-      function completer (line) {
-        assert.equal(line, 'b');
-        return [['bTESTSTRING'], line];
+    function onData(data) {
+      buffer += data.toString();
+
+      if (buffer.indexOf(completion) >= 0) {
+        input.write('\n');
+        output.off('data', onData);
       }
+    }
 
-      const input = stream.PassThrough();
-      const output = stream.PassThrough();
-      const rl = readline.createInterface({ input: input, output: output, completer: completer, terminal: true });
-
-      rl.question('a').then(answer => {
-        assert.ok(output.read().toString().match(/TESTSTRING/));
-        done();
-      });
-
-      input.write('b\t');
-      input.write('\n');
+    rl.question(question).then(str => {
+      assert.equal(str, completion);
+      done();
     });
 
-    it('completer support async', done => {
-      function completer (line, cb) {
-        assert.equal(line, 'b');
-        cb(null, [['bTESTSTRING'], line]);
-      }
-
-      const input = stream.PassThrough();
-      const output = stream.PassThrough();
-      const rl = readline.createInterface({ input: input, output: output, completer: completer, terminal: true });
-
-      rl.question('a').then(answer => {
-        assert.ok(output.read().toString().match(/TESTSTRING/));
-        done();
-      });
-
-      input.write('b\t');
-      input.write('\n');
-    });
+    output.on('data', onData);
+    input.write(`${answer}\t`);
   });
-});*/
+});
