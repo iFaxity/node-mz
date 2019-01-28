@@ -1,5 +1,5 @@
 describe('fs', () => {
-  const assert = require('assert').strict;
+  const assert = require('assert');
   const fs = require('../fs');
 
   it('Promised function', done => {

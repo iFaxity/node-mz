@@ -1,5 +1,5 @@
 describe('readline', () => {
-  const assert = require('assert').strict;
+  const assert = require('assert');
   const readline = require('../readline');
   const { PassThrough } = require('stream');
 
@@ -41,7 +41,7 @@ describe('readline', () => {
 
       if (buffer.indexOf(completion) >= 0) {
         input.write('\n');
-        output.off('data', onData);
+        output.removeListener('data', onData);
       }
     }
 
@@ -74,7 +74,7 @@ describe('readline', () => {
 
       if (buffer.indexOf(completion) >= 0) {
         input.write('\n');
-        output.off('data', onData);
+        output.removeListener('data', onData);
       }
     }
 

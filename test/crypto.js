@@ -1,5 +1,5 @@
 describe('crypto', () => {
-  const assert = require('assert').strict;
+  const assert = require('assert');
   const crypto = require('../crypto');
   const size = 16;
 

@@ -1,5 +1,5 @@
 describe('zlib', () => {
-  const assert = require('assert').strict;
+  const assert = require('assert');
   const zlib = require('../zlib');
   const testStr = 'zlibteststring';
 

@@ -1,5 +1,5 @@
 describe('child_process', () => {
-  const assert = require('assert').strict;
+  const assert = require('assert');
   const child_process = require('../child_process');
   const testStr = 'hello world';
   const command = `echo '${testStr}'`;

@@ -1,5 +1,5 @@
 describe('dns', () => {
-  const assert = require('assert').strict;
+  const assert = require('assert');
   const dns = require('../dns');
 
   it('Promised function', done => {
