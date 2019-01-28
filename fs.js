@@ -1,7 +1,6 @@
 const { promisifyAll } = require('./util');
-const fs = require('fs');
 
-module.exports = promisifyAll(fs, [
+module.exports = promisifyAll(require('fs'), [
   'access',
   'appendFile',
   'chmod',

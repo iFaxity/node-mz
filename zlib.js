@@ -1,7 +1,6 @@
 const { promisifyAll } = require('./util');
-const zlib = require('zlib');
 
-module.exports = promisifyAll(zlib, [
+module.exports = promisifyAll(require('zlib'), [
   'deflate',
   'deflateRaw',
   'gzip',

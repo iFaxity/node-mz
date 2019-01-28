@@ -5,14 +5,13 @@ module.exports = {
     // Promisify all the methods and return an object
     const dest = Object.assign({}, src);
 
-    methods.forEach(method => {
+    return methods.reduce((acc, method) => {
       // Only add the function if it exists in the source
       if (typeof src[method] == 'function') {
-        dest[method] = promisify(src[method]);
+        acc[method] = promisify(src[method]);
       }
-    });
-
-    return dest;
+      return acc;
+    }, dest);
   },
   promisify,
 };

@@ -1,7 +1,6 @@
 const { promisifyAll } = require('./util');
-const crypto = require('crypto');
 
-module.exports = promisifyAll(crypto, [
+module.exports = promisifyAll(require('crypto'), [
   'pbkdf2',
   'pseudoRandomBytes',
   'randomBytes',
