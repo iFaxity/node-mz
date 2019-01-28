@@ -1,10 +1,12 @@
 const { promisifyAll } = require('./util');
 
 module.exports = promisifyAll(require('zlib'), [
+  'brotliCompress',
+  'brotliDecompress',
   'deflate',
   'deflateRaw',
-  'gzip',
   'gunzip',
+  'gzip',
   'inflate',
   'inflateRaw',
   'unzip',

@@ -1,17 +1,27 @@
 const { promisify } = require('util');
 
-module.exports = {
-  promisifyAll(src, methods) {
-    // Promisify all the methods and return an object
-    const dest = Object.assign({}, src);
+function isDeprecated(src, method) {
+  const d = Object.getOwnPropertyDescriptor(src, method);
+  return d && d.get && d.get.name == 'deprecated';
+}
 
-    return methods.reduce((acc, method) => {
-      // Only add the function if it exists in the source
-      if (typeof src[method] == 'function') {
-        acc[method] = promisify(src[method]);
-      }
-      return acc;
-    }, dest);
-  },
+module.exports = {
   promisify,
+  promisifyAll(src, methods) {
+    return Object.keys(src).reduce((acc, prop) => {
+      // Prevent accessing any deprecated property.
+      // It prints an annoying warning every time.
+      if (!isDeprecated(src, prop)) {
+        const value = src[prop];
+
+        if (methods.includes(prop) && typeof value == 'function') {
+          acc[prop] = promisify(value);
+        } else {
+          acc[prop] = value;
+        }
+      }
+
+      return acc;
+    }, {});
+  },
 };

@@ -6,6 +6,7 @@ module.exports = promisifyAll(require('fs'), [
   'chmod',
   'chown',
   'close',
+  'copyFile',
   'fchmod',
   'fchown',
   'fdatasync',
@@ -13,6 +14,7 @@ module.exports = promisifyAll(require('fs'), [
   'fsync',
   'ftruncate',
   'futimes',
+  'lchmod',
   'lchown',
   'link',
   'lstat',
@@ -20,8 +22,8 @@ module.exports = promisifyAll(require('fs'), [
   'mkdtemp',
   'open',
   'read',
-  'readFile',
   'readdir',
+  'readFile',
   'readlink',
   'realpath',
   'rename',
@@ -33,6 +35,4 @@ module.exports = promisifyAll(require('fs'), [
   'utimes',
   'write',
   'writeFile',
-  // Newer functions
-  'copyFile',
 ]);
