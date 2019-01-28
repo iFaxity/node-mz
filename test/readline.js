@@ -16,7 +16,7 @@ describe('readline', () => {
     rl.question(question).then(str => {
       assert.equal(str, answer);
       done();
-    });
+    }, done);
 
     assert.equal(output.read().toString('utf-8'), question);
     input.write(`${answer}\n`);
@@ -48,7 +48,7 @@ describe('readline', () => {
     rl.question(question).then(str => {
       assert.equal(str, completion);
       done();
-    });
+    }, done);
 
     output.on('data', onData);
     input.write(`${answer}\t`);
@@ -81,7 +81,7 @@ describe('readline', () => {
     rl.question(question).then(str => {
       assert.equal(str, completion);
       done();
-    });
+    }, done);
 
     output.on('data', onData);
     input.write(`${answer}\t`);

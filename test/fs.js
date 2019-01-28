@@ -3,7 +3,7 @@ describe('fs', () => {
   const fs = require('../fs');
 
   it('Promised function', done => {
-    fs.stat(__filename).then(() => done()).catch(done);
+    fs.stat(__filename).then(() => done(), done);
   });
 
   it('Synchronous function', () => {

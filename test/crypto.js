@@ -1,15 +1,21 @@
 describe('crypto', () => {
   const assert = require('assert').strict;
   const crypto = require('../crypto');
+  const size = 16;
 
   it('Promised function', done => {
-    crypto.randomBytes(16).then(() => done());
+    const buffer = Buffer.alloc(size);
+
+    crypto.randomFill(buffer)
+    .then(buf => {
+      assert.equal(buf.length, size);
+      done();
+    }, done);
   });
 
-  it('Synchronous function', done => {
-    crypto.randomBytes(16, err => {
-      assert(!err);
-      done();
-    });
+  it('Synchronous function', () => {
+    const buffer = Buffer.alloc(size);
+    const buf = crypto.randomFillSync(buffer);
+    assert.equal(buf.length, size);
   });
 });
