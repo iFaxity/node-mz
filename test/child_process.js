@@ -1,6 +1,6 @@
-const assert = require('assert');
+const assert = require('assert').strict;
 
-describe('child_process', () => {
+/*describe('child_process', () => {
   it('Promised exec()', done => {
 
   });
@@ -8,4 +8,4 @@ describe('child_process', () => {
   it('Synchronous exec()', done => {
 
   });
-});
+});*/
