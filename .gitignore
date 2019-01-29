@@ -29,6 +29,10 @@ typings/
 # parcel-bundler cache (https://parceljs.org/)
 .cache
 
+# nyc (Istanbul) reports
+.nyc_output/
+coverage/
+
 # General
 .DS_Store
 .AppleDouble

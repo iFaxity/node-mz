@@ -3,6 +3,9 @@
   "version": "1.0.1",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "test": "nyc --reporter=lcov mocha && nyc report"
+  },
   "engines": {
     "node": ">=8"
   },
@@ -10,6 +13,7 @@
     "*.js"
   ],
   "devDependencies": {
-    "mocha": "^5.2.0"
+    "mocha": "^5.2.0",
+    "nyc": "^13.1.0"
   }
 }
