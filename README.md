@@ -1,4 +1,4 @@
-@ifaxity/koa-render
+@ifaxity/mz
 ===================
 
 ## A minimal promises version of node modules built in modules
