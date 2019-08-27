@@ -108,7 +108,7 @@ The modules & functions that are promised are:
   * `write`
   * `writeFile`
 * `readline`
-  * `createInterface` - Modified to return a custom Interface class object but only modifies the question method, teh other methods are extended.
+  * `createInterface` - Modified to return a custom Interface class object but only modifies the question method, the other methods are extended.
   * `Interface` - The completer is compatible with both synchronous and promises. But not the normal callback.
     * `question`
 * `zlib`
