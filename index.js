@@ -1,4 +1,4 @@
-exports.child_process = require('.child_process');
+exports.child_process = require('./child_process');
 exports.crypto = require('./crypto');
 exports.dns = require('./dns');
 exports.fs = require('./fs');
